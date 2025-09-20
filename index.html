@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- manifiesto PWA (AGREGAR LOS ICONOS LUEGO) -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0f172a">
+  <title>Vocab UA</title>
+  <style>
+    /* estilos mínimos para ver algo mientras desarrollas */
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 1rem auto; padding: 0 1rem; }
+    .item { border: 1px solid #ddd; border-radius: .5rem; padding: .75rem; margin-bottom: .5rem; }
+    input, textarea, button { padding: .5rem; margin: .25rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Vocabulario (UA ⇄ ES)</h1>
+
+  <!-- formulario de alta -->
+  <form id="form"><!-- TODO: completar campos en app.js -->
+    <input id="ua" placeholder="Слово (UA)" required />
+    <input id="es" placeholder="Palabra (ES)" required />
+    <textarea id="note" placeholder="Notas / expresión (opcional)"></textarea>
+    <button>Agregar</button>
+  </form>
+
+  <!-- buscador -->
+  <input id="q" placeholder="Buscar (UA/ES/nota)" />
+
+  <!-- listado -->
+  <div id="list"></div>
+
+  <!-- tu JS como módulo ES -->
+  <script type="module" src="/src/main.js"></script>
+
+  <!-- registro del service worker -->
+  <script>
+    // registra el SW solo si el navegador lo soporta
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .catch(err => console.error('Fallo registrando SW:', err));
+    }
+  </script>
+</body>
+</html>
